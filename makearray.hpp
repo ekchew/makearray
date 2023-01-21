@@ -42,7 +42,9 @@
 
 template<typename T, typename... Args>
     constexpr auto MakeArrayWithCast(Args&&... args) {
-        return std::array<T, sizeof...(Args)>{std::forward<T>(args)...};
+        return std::array<T, sizeof...(Args)>{
+            static_cast<T>(std::forward<Args>(args))...
+            };
     }
 
 #endif
