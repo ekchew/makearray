@@ -1,8 +1,6 @@
 #ifndef MAKEARRAY_HPP
 #define MAKEARRAY_HPP
 
-#include "concepts_check.hpp"
-
 #include <array>
 #include <utility>
 
@@ -19,13 +17,8 @@
  *  This returns a std::array<float,3> containing {1.0f, 2.0f, 3.5f} as arr.
  */
 
-#if CONCEPTS_AVAILABLE
-    template<typename T, std::convertible_to<T>... Args>
-#else
-    template<typename T, typename... Args>
-#endif
-    constexpr auto MakeArray(Args&&... args)
-    {
+template<typename T, typename... Args>
+    constexpr auto MakeArray(Args&&... args){
         return std::array<T, sizeof...(Args)>{std::forward<T>(args)...};
     }
 
